@@ -2,6 +2,7 @@ import request from 'supertest';
 import { expect } from 'chai';
 import app from '../src/app.js';
 import Aluno from '../src/models/aluno.model.js';
+import Matricula from '../src/models/matricula.model.js';
 import Trabalho from '../src/models/trabalho.model.js';
 import testData from './data/aluno.json' with { type: 'json' };
 import { loginAsAdmin, loginAsUser } from './helpers/auth.js';
@@ -12,6 +13,7 @@ describe('Fluxo de cadastro e entrega do aluno', () => {
 
   after(async () => {
     if (trabalho) await Trabalho.deleteOne({ _id: trabalho.id });
+    if (aluno) await Matricula.deleteMany({ alunoId: aluno.id });
     if (aluno) await Aluno.deleteOne({ _id: aluno.id });
   });
 
