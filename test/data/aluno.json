@@ -1,0 +1,21 @@
+{
+  "admin": {
+    "email": "admin@escola.com",
+    "senha": "admin123"
+  },
+  "alunos": [
+    {
+      "nome": "Aluno Data Driven",
+      "email": "aluno.data.driven@example.com",
+      "matricula": "DD2026001",
+      "senha": "aluno123"
+    }
+  ],
+  "disciplina": {
+    "id": "disciplina-matematica"
+  },
+  "trabalho": {
+    "titulo": "Trabalho Data Driven",
+    "descricao": "Entrega criada pela suíte automatizada."
+  }
+}

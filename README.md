@@ -97,6 +97,20 @@ npm run dev
 O servidor sobe por padrão em `http://localhost:3000` (pode ser alterado com a variável de
 ambiente `PORT`).
 
+### Testes automatizados
+
+Os testes usam Mocha, SuperTest e Chai. Os dados do fluxo de cadastro, login e entrega ficam em
+`test/data/aluno.json`, e os logins reutilizáveis estão em `test/helpers/auth.js`.
+
+Com o MongoDB disponível e configurado no arquivo `.env` (use `.env.example` como base), execute:
+
+```bash
+npm test
+```
+
+A pipeline do GitHub Actions inicia um serviço MongoDB, instala as dependências com `npm ci` e executa
+essa mesma suíte a cada push ou pull request na branch `main`.
+
 ### Configuração do MongoDB
 
 Por padrão, a API se conecta a um MongoDB local em
