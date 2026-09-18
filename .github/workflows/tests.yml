@@ -38,3 +38,13 @@ jobs:
         run: npm test
         env:
           MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          SEED_ADMIN_PASSWORD: ${{ secrets.SEED_ADMIN_PASSWORD }}
+          SEED_STUDENT_PASSWORD: ${{ secrets.SEED_STUDENT_PASSWORD }}
+          TEST_ADMIN_EMAIL: ${{ secrets.TEST_ADMIN_EMAIL }}
+          TEST_ADMIN_PASSWORD: ${{ secrets.TEST_ADMIN_PASSWORD }}
+          TEST_STUDENT_EMAIL: ${{ secrets.TEST_STUDENT_EMAIL }}
+          TEST_STUDENT_PASSWORD: ${{ secrets.TEST_STUDENT_PASSWORD }}
+          TEST_NEW_STUDENT_PASSWORD: ${{ secrets.TEST_NEW_STUDENT_PASSWORD }}
+          TEST_INVALID_PASSWORD: ${{ secrets.TEST_INVALID_PASSWORD }}
+          TEST_UNKNOWN_EMAIL: ${{ secrets.TEST_UNKNOWN_EMAIL }}

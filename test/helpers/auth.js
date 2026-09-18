@@ -1,6 +1,7 @@
+import { testCredentials } from '../config.js';
+
 export async function loginAsAdmin(client, credentials = {
-  email: 'admin@escola.com',
-  senha: 'admin123',
+  ...testCredentials.admin,
 }) {
   const response = await client
     .post('/api/auth/login')
