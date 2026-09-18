@@ -13,8 +13,6 @@ import routes from './routes/index.js';
 import notFound from './middlewares/notFound.js';
 import errorHandler from './middlewares/errorHandler.js';
 import './database/seed.js';
-import loginRequest from './middlewares/loginRequest.js';
-import { createLoginProtection } from './services/loginProtection.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,13 +21,10 @@ const openapiPath = path.join(__dirname, '..', 'docs', 'openapi.yaml');
 const openapiYaml = fs.readFileSync(openapiPath, 'utf8');
 const swaggerDocument = yaml.load(openapiYaml);
 
-export function createApp({ protection = createLoginProtection(), logging = true } = {}) {
 const app = express();
-app.locals.loginProtection = protection;
 
 app.use(cors());
-if (logging) app.use(morgan('dev'));
-app.post('/api/auth/login', loginRequest);
+app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -49,7 +44,5 @@ app.use('/api', routes);
 
 app.use(notFound);
 app.use(errorHandler);
-return app;
-}
 
-export default createApp();
+export default app;

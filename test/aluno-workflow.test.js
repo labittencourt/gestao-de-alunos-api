@@ -1,4 +1,4 @@
-﻿import request from 'supertest';
+import request from 'supertest';
 import { expect } from 'chai';
 import app from '../src/app.js';
 import Aluno from '../src/models/aluno.model.js';
@@ -6,7 +6,6 @@ import Matricula from '../src/models/matricula.model.js';
 import Trabalho from '../src/models/trabalho.model.js';
 import testData from './data/aluno.json' with { type: 'json' };
 import { loginAsAdmin, loginAsUser } from './helpers/auth.js';
-import { testCredentials } from './config.js';
 
 describe('Fluxo de cadastro e entrega do aluno', () => {
   let aluno;
@@ -21,14 +20,13 @@ describe('Fluxo de cadastro e entrega do aluno', () => {
   for (const alunoData of testData.alunos) {
     it('admin cadastra aluno, aluno faz login e registra uma entrega', async () => {
       const client = request(app);
-      const adminLogin = await loginAsAdmin(client, testCredentials.admin);
+      const adminLogin = await loginAsAdmin(client, testData.admin);
       expect(adminLogin.status).to.equal(200);
       expect(adminLogin.body).to.have.property('token');
 
       const adminToken = adminLogin.body.token;
       const alunoDataUnico = {
         ...alunoData,
-        senha: process.env[alunoData.senhaEnv],
         email: `${Date.now()}-${alunoData.email}`,
         matricula: `${alunoData.matricula}-${Date.now()}`,
       };
@@ -56,7 +54,7 @@ describe('Fluxo de cadastro e entrega do aluno', () => {
 
       const alunoLogin = await loginAsUser(client, {
         email: alunoDataUnico.email,
-        senha: testCredentials.newStudentPassword,
+        senha: alunoDataUnico.senha,
       });
 
       expect(alunoLogin.status).to.equal(200);

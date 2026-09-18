@@ -2,7 +2,6 @@ import request from 'supertest';
 import { expect } from 'chai';
 import app from '../src/app.js';
 import { loginAsUser } from './helpers/auth.js';
-import { testCredentials } from './config.js';
 
 describe('Autorização e isolamento dos dados', () => {
   it('deve rejeitar uma rota administrativa sem token', async () => {
@@ -13,7 +12,10 @@ describe('Autorização e isolamento dos dados', () => {
   });
 
   it('não deve permitir que um aluno consulte dados de outro aluno', async () => {
-    const login = await loginAsUser(request(app), testCredentials.student);
+    const login = await loginAsUser(request(app), {
+      email: 'ana.souza@example.com',
+      senha: '123456',
+    });
 
     const resposta = await request(app)
       .get('/api/alunos/aluno-bruno-lima/notas')
@@ -24,7 +26,10 @@ describe('Autorização e isolamento dos dados', () => {
   });
 
   it('não deve aceitar entrega em disciplina em que o aluno não está matriculado', async () => {
-    const login = await loginAsUser(request(app), testCredentials.student);
+    const login = await loginAsUser(request(app), {
+      email: 'ana.souza@example.com',
+      senha: '123456',
+    });
 
     const resposta = await request(app)
       .post('/api/alunos/aluno-ana-souza/trabalhos')

@@ -61,18 +61,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 
-        '413':
-          description: Corpo da requisição excede o limite do parser JSON (100 KiB)
-          content:
-            application/json:
-              schema:
-                type: object
-                required: [error]
-                properties:
-                  error:
-                    type: string
-                    example: Corpo da requisição muito grande.
-
   /admin/alunos:
     get:
       tags: [Alunos (Admin)]
@@ -719,7 +707,7 @@ components:
         senha:
           type: string
           format: password
-          example: <senha-definida-no-ambiente>
+          example: admin123
 
     Usuario:
       type: object
@@ -793,7 +781,7 @@ components:
           type: string
           format: password
           description: Senha de acesso do aluno, definida pelo administrador no cadastro.
-          example: <senha-definida-no-ambiente>
+          example: '123456'
 
     AlunoUpdate:
       type: object
