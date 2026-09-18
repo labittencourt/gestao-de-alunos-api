@@ -115,13 +115,9 @@ permanecem, e os registros criados pelos testes são removidos por escopo.
 No PowerShell com execução de scripts bloqueada, use `npm.cmd test`.
 
 O seed exige `SEED_ADMIN_PASSWORD` e `SEED_STUDENT_PASSWORD`. Gere `JWT_SECRET`
-com um valor aleatório e não publique seu `.env`. A pipeline usa GitHub Actions
-Secrets com os mesmos nomes das variáveis de exemplo.
-
-Antes de habilitar a pipeline, cadastre em **Settings → Secrets and variables → Actions**:
-`JWT_SECRET`, `SEED_ADMIN_PASSWORD`, `SEED_STUDENT_PASSWORD`, `TEST_ADMIN_EMAIL`,
-`TEST_ADMIN_PASSWORD`, `TEST_STUDENT_EMAIL`, `TEST_STUDENT_PASSWORD`,
-`TEST_NEW_STUDENT_PASSWORD`, `TEST_INVALID_PASSWORD` e `TEST_UNKNOWN_EMAIL`.
+com um valor aleatório e não publique seu `.env`. A pipeline gera esses valores
+aleatoriamente a cada execução, apenas para o MongoDB temporário do CI; não exige
+GitHub Actions Secrets.
 
 Para sondagens limitadas de formatos, colisão de perfis, tempos de resposta e
 tentativas repetidas, execute `npm run test:explore`. O comando salva metadados
